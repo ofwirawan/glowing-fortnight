@@ -67,6 +67,7 @@ def debounce_speaker_ids(speaker_track_ids, min_hold_frames=15):
         if track_id == None:
             continue
         
+        # If no stable frames have been found
         if length < min_hold_frames and prev_stable_id == None:
             first_unstable_ids.append(i)
             continue
@@ -81,10 +82,11 @@ def debounce_speaker_ids(speaker_track_ids, min_hold_frames=15):
             
             prev_stable_id = track_id
 
+    # Compress to first speaker
     if first_unstable_ids:
         return [speaker_track_ids[0]] * len(speaker_track_ids)
     
-    
+    # Unpacking RLE
     debounced_speaker_track_ids = []
     for track_id, _, length in compressed:
         for _ in range(length):
