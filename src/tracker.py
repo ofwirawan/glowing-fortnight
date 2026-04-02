@@ -63,7 +63,7 @@ def track_face_crop(
         speaker_track_ids = debounce_speaker_ids(
             speaker_track_ids, min_hold_frames=min_speaker_hold_frames
         )
-
+        
     # 9:16 crop dimensions within the video frame
     crop_w = video_height * 9.0 / 16.0
     crop_h = float(video_height)
@@ -147,7 +147,6 @@ def track_face_crop(
 
         need_move_x = abs(dx) > dz_half_w
         need_move_y = abs(dy) > dz_half_h
-        print(dz_half_h, dz_half_w)
 
         if not need_move_x and not need_move_y:
             # Face within dead zone — hold position
